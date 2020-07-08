@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    withRouter
+} from "react-router-dom";
+import CpuList from "./CpuGame/CpuList";
+import CpuCreate from "./CpuGame/CpuCreate";
+import CpuEdit from "./CpuGame/CpuEdit";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+    render() {
+        return (
+            <Router>
+                <Link to={'/cpus'}>Cpu List</Link>
+                <Link to={'/cpus/add'}>Cpu Create</Link>
+                <Switch>
+                    <Route path={'/cpus'} exact>
+                        <CpuList/>
+                    </Route>
+                    <Route path={'/cpus/add'}>
+                        <CpuCreate/>
+                    </Route>
+                    <Route path={'/cpus/:id'}>
+                        <CpuEdit/>
+                    </Route>
+                </Switch>
+            </Router>
+        );
+    }
 }
 
 export default App;
